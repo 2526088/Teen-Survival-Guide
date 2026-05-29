@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teen Survival Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primrose-garden: #F297A0;
+            --pinktone: #F9D0CE;
+            --lime-lollipop: #B6BB79;
+            --yucca-white: #F3EBD8;
+            --text-dark: #4A3E3D; /* Warna cokelat gelap pastel biar gak kaku */
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--yucca-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVIGATION DENGAN ICON LUCU */
+        header {
+            background-color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px dashed var(--primrose-garden);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+        
+        .logo span {
+            color: var(--primrose-garden);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        nav a:hover {
+            transform: scale(1.1);
+            color: var(--primrose-garden);
+        }
+
+        nav a .icon {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        /* HERO BANNER DENGAN HIASAN AWAN & BINTANG */
+        .hero {
+            background: linear-gradient(180deg, var(--pinktone) 0%, #fff 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dekorasi Doodle Mengambang */
+        .doodle {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.3;
+            animation: float 4s ease-in-out infinite;
+        }
+        .doodle.d1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .doodle.d2 { top: 20%; right: 10%; animation-delay: 1s; }
+        .doodle.d3 { bottom: 15%; left: 20%; animation-delay: 2s; }
+        .doodle.d4 { bottom: 10%; right: 25%; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #6b5b59;
+        }
+
+        /* MAIN CONTENT (1 KOLOM UTAMA) */
+        main {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .concept-section {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 3px solid var(--pinktone);
+            margin-bottom: 4rem;
+            box-shadow: 5px 5px 0px var(--pinktone);
+        }
+
+        .concept-section h2 {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .articles-title {
+            font-family: var(--font-title);
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        /* STYLE KARTU BINDER BUKU CATATAN (NOTEBOOK EFFECT) */
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 2rem 2rem 2rem 3.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            border: 3px solid var(--text-dark);
+            box-shadow: 6px 6px 0px var(--lime-lollipop);
+        }
+
+        /* Efek Lubang & Garis Binder Buku di Sebelah Kiri */
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2.2rem;
+            width: 3px;
+            height: 100%;
+            background: rgba(74, 62, 61, 0.15);
+            border-left: 1px dashed var(--text-dark);
+        }
+
+        /* Spiral/Kawat Binder */
+        .binder-rings {
+            position: absolute;
+            left: 0.8rem;
+            top: 10%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .ring {
+            width: 15px;
+            height: 25px;
+            border: 3px solid var(--text-dark);
+            background: #e0e0e0;
+            border-radius: 10px;
+            box-shadow: inset 2px 2px 0 white;
+        }
+
+        /* Konten di dalam Kartu */
+        .card-header-flex {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        .article-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            color: var(--text-dark);
+        }
+
+        .article-card p {
+            font-size: 0.95rem;
+            color: #6b5b59;
+            margin-bottom: 1.5rem;
+        }
+
+        /* TOMBOL READ MORE YANG LUCU */
+        button {
+            font-family: var(--font-body);
+            background-color: var(--primrose-garden);
+            color: white;
+            border: 2px solid var(--text-dark);
+            padding: 0.6rem 1.5rem;
+            font-weight: 600;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 3px 3px 0px var(--text-dark);
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px var(--text-dark);
+            background-color: var(--pinktone);
+            color: var(--text-dark);
+        }
+
+        /* FOOTER DEKORATIF */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--yucca-white);
+            text-align: center;
+            padding: 2.5rem;
+            margin-top: 5rem;
+            border-top: 5px dashed var(--pinktone);
+        }
+
+        footer p {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .social-links a {
+            color: var(--pinktone);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .social-links a:hover {
+            color: var(--lime-lollipop);
+            text-decoration: underline;
+        }
+
+        /* POPUP MODAL (LEBIH LEBAR DAN NYAMAN UNTUK TEKS PANJANG) */
+        dialog {
+            border: 4px solid var(--text-dark);
+            border-radius: 25px;
+            padding: 2.5rem;
+            max-width: 650px;
+            width: 90%;
+            margin: auto;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+            overflow-y: auto;
+            max-height: 85vh;
+        }
+
+        dialog::backdrop {
+            background-color: rgba(74, 62, 61, 0.5);
+            backdrop-filter: blur(4px);
+        }
+
+        dialog h2 {
+            font-family: var(--font-title);
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-size: 1.6rem;
+            border-bottom: 3px dashed var(--pinktone);
+            padding-bottom: 0.5rem;
+        }
+
+        dialog h3 {
+            font-family: var(--font-title);
+            margin: 1.5rem 0 0.5rem 0;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        dialog p {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        dialog ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.2rem;
+        }
+
+        dialog li {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        dialog button {
+            background-color: var(--lime-lollipop);
+            margin: 2rem auto 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><span>✏️</span> Teen Survival Guide</div>
+        <nav>
+            <a href="#beranda"><span class="icon">🏠</span>Beranda</a>
+            <a href="#school"><span class="icon">📚</span>School</a>
+            <a href="#social"><span class="icon">💬</span>Social</a>
+            <a href="#life"><span class="icon">🌱</span>Life & Mind</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="beranda">
+        <div class="doodle d1">⭐</div>
+        <div class="doodle d2">☁️</div>
+        <div class="doodle d3">🌸</div>
+        <div class="doodle d4">✨</div>
+        
+        <h1>SURVIVE, GROW,<br>and LEVEL UP! 🚀</h1>
+        <p>Panduan seru dan santai buat kamu lewati masa-masa sekolah tanpa drama dan pusing overthinking.</p>
+    </section>
+
+    <main>
+        <section class="concept-section">
+            <h2>Hi, Teman Remaja! 👋</h2>
+            <p>Masa sekolah emang seru, tapi kadang bikin capek banget ya. Tugas numpuk, drama temen, sampai bingung mikirin masa depan. Tenang, di sini kita bakal bagi tips yang gampang, seru, dan gak bikin kamu pusing sendiri!</p>
+        </section>
+
+        <h2 class="articles-title">📖 Catatan Panduan Kamu</h2>
+
+        <section id="school">
+            <div class="article-card">
+                <div class="binder-rings">
+                    <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+                </div>
+                <div class="card-header-flex">
+                    <div class="card-icon">📝</div>
+                    <h3>School Survival: Trik Hadapi Tugas Numpuk</h3>
+                </div>
+                <p>Ngerasa waktu 24 jam kurang banget buat ngerjain tugas sekolah? Cobain cara belajar anti-stres yang gampang banget ditiru di sini.</p>
+                <button onclick="openModal('school-modal')">Baca Tips ✨</button>
+            </div>
+        </section>
+
+        <section id="social">
+            <div class="article-card" style="box-shadow: 6px 6px 0px var(--primrose-garden);">
+                <div class="binder-rings">
+                    <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+                </div>
+                <div class="card-header-flex">
+                    <div class="card-icon">👭</div>
+                    <h3>Social Survival: Lolos dari Drama Teman</h3>
+                </div>
+                <p>Lagi musuhan atau canggung sama temen sekelas? Gak usah panik, ini tips cara ngobrol yang enak biar keadaan gak makin runyam.</p>
+                <button onclick="openModal('social-modal')">Baca Tips ✨</button>
+            </div>
+        </section>
+
+        <section id="life">
+            <div class="article-card" style="box-shadow: 6px 6px 0px var(--pinktone);">
+                <div class="binder-rings">
+                    <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+                </div>
+                <div class="card-header-flex">
+                    <div class="card-icon">🧠</div>
+                    <h3>Life & Mind: Atasi Kebanyakan Pikiran</h3>
+                </div>
+                <p>Suka overthinking pas mau tidur malam? Yuk belajar trik santai buat nenangin pikiran kamu biar bisa tidur nyenyak.</p>
+                <button onclick="openModal('life-modal')">Baca Tips ✨</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>❤️ Dibuat khusus untuk seluruh remaja hebat di Indonesia • 2026</p>
+        <div class="social-links">
+            <a href="#">📸 Instagram</a> | 
+            <a href="#">🎵 TikTok</a> | 
+            <a href="#">💻 GitHub</a>
+        </div>
+    </footer>
+
+    <dialog id="school-modal">
+        <h2>📚 Tugas Numpuk? Tenang, Gini Cara Beresinnya!</h2>
+        <p>Pernah gak sih baru buka grup chat kelas, tiba-tiba isinya list tugas semua? Rasanya langsung lemes, pusing, dan pengen nge-blank aja seharian. Menunda tugas itu wajar banget karena kita males ngeliat jumlahnya yang banyak. Tapi kalau ditumpuk terus, yang ada pas malam h-1 kamu malah nangis sambil begadang. Yuk, kita beresin pelan-pelan pakai cara seru ini:</p>
+        
+        <h3>Trik Biar Tugas Cepat Kelar Tanpa Kram Otak:</h3>
+        <ul>
+            <li><strong>Main Game 25 Menit Belajar:</strong> Caranya gampang banget. Kamu pasang alarm di HP selama 25 menit. Selama waktu itu, kamu wajib fokus cuma ke tugas kamu (singkirkan dulu HP atau tab tab sosmed). Nah, begitu alarm bunyi, kamu dapat 'hadiah' istirahat selama 5 menit bebas ngapain aja. Ulangi trik ini 3 sampai 4 kali. Kamu bakal kaget sendiri ternyata tugasmu udah kelar banyak tanpa berasa capek.</li>
+            <li><strong>Cicil dari yang Paling Gampang Dulu:</strong> Jangan langsung hajar tugas matematika yang rumit kalau emang mood lagi jelek. Mulai aja dari bikin cover, nulis nama, atau ngerjain tugas seni budaya yang gampang. Begitu ada satu tugas yang selesai, otak kamu bakal ngerasa 'wah ternyata gue bisa!' dan jadi semangat buat lanjutin tugas berikutnya.</li>
+            <li><strong>Bikin HP Kamu 'Pingsan' Sementara:</strong> Sadar gak sih, yang bikin tugas sejam gak kelar-kelar itu karena tiap 2 menit sekali kita ngecek notifikasi Instagram atau TikTok? Pas lagi belajar, taruh HP kamu di dalam tas, di atas kasur, atau titip ke mama dulu. Kasih tahu temen-temen kalau kamu mau menghilang sebentar buat bertapa ngerjain tugas.</li>
+            <li><strong>Cari 'Bestie' Buat Belajar Bareng:</strong> Belajar sendirian emang bikin cepet ngantuk. Coba ajak temen sekelas yang emang beneran mau belajar (bukan cuma mau numpang nama atau ngegosip ya). Kamu bisa saling bagi tugas, misal kamu nyari materi bab 1, temenmu bab 2, terus kalian saling jelasin. Belajar dengan cara ngajarin temen itu terbukti bikin kita cepet paham, lho!</li>
+        </ul>
+        <button onclick="closeModal('school-modal')">Tutup Catatan</button>
+    </dialog>
+
+    <dialog id="social-modal">
+        <h2>💬 Tips Lolos dari Drama Teman & Circle Sekolah</h2>
+        <p>Kehidupan sosial pas zaman sekolah itu emang penuh warna, tapi kadang juga penuh drama yang bikin pening. Hari ini bisa jadi kompak banget, eh besoknya tiba-tiba ada sindir-sindiran di status, grup chat baru tanpa kita, atau dikacangin pas mau gabung makan di kantin. Merasa sedih dan pengen gak masuk sekolah karena lingkungan toxic itu valid banget kok. Biar kamu gak gampang stres di sekolah, cobain trik ini:</p>
+        
+        <h3>Cara Aman Bertahan di Tengah Geng Sekolah:</h3>
+        <ul>
+            <li><strong>Ngomong Langsung Pakai Perasaan, Jangan Nuduh:</strong> Kalau kamu ngerasa lagi dijauhin atau ada masalah sama temen dekat, hindari kata-kata ngegas kayak, <em>"Lu kenapa sih jauhin gue? Egois banget!"</em>. Kalimat kayak gitu malah bikin dia makin emosi dan balik nyerang. Mending ganti jadi yang lebih adem: <em>"Eh, aku ngerasa agak sedih deh akhir-akhir ini kayaknya kita agak jarang ngobrol. Ada salah ya aku?"</em>. Dijamin dia bakal lebih luluh.</li>
+            <li><strong>Jangan Takut Bilang "Gak Bisa":</strong> Sering gak sih kejebak jadi orang yang selalu iya-iya aja karena takut gak punya temen atau takut dibilang gak asik? Dipinjemin barang terus gak dibalikin, atau disuruh ngerjain tugas kelompok sendirian. Mulai sekarang, yuk berani bilang: <em>"Maaf ya, kali ini aku gak bisa bantu dulu karena lagi ada urusan juga."</em>. Temen yang beneran tulus gak bakal kabur cuma karena kamu nolak sekali dua kali.</li>
+            <li><strong>Stop Nyindir Balik di Story Sosmed:</strong> Ini penting banget! Kalau lagi kesel sama seseorang, jangan pernah bikin sg hitam pakai lagu galau atau kata-kata sindiran. Kenapa? Karena selain gak menyelesaikan masalah, hal itu justru bikin dramanya makin melebar ke mana-mana dan bikin orang lain risih liatnya. Kalau ada masalah, selesaikan berdua atau cuekin aja sekalian.</li>
+            <li><strong>Jangan Cuma Punya Satu Circle:</strong> Jangan kurung diri kamu di satu geng aja. Kalau geng itu lagi marahan, kamu bakal kerasa kesepian banget. Makanya, cobalah buat sok akrab dan main sama anak kelas sebelah, ikut organisasi sekolah, atau gabung klub ekskul. Punya temen di mana-mana bikin hidup kamu jauh lebih seru dan bebas drama kubu-kubuan.</li>
+        </ul>
+        <button onclick="closeModal('social-modal')">Tutup Catatan</button>
+    </dialog>
+
+    <dialog id="life-modal">
+        <h2>🌱 Cara Jinakin Overthinking di Malam Hari</h2>
+        <p>Siapa nih yang kalau udah jam 11 malam ke atas matanya malah seger, terus otaknya mulai muter film-film horor masa depan? Mulai dari mikirin, "Nanti kalau lulus aku kuliah di mana ya?", "Gimana kalau nanti aku jadi pengangguran?", sampai mikirin kejadian memalukan pas kepeleset di depan kelas 3 tahun yang lalu. Overthinking di malam hari itu cuma bikin badan lemas, mata panda, dan bikin kamu bad mood pas bangun pagi. Yuk kita rem pikirannya:</p>
+        
+        <h3>Trik Biar Pikiran Tenang dan Bisa Tidur Nyenyak:</h3>
+        <ul>
+            <li><strong>Muntahin Semuanya ke Kertas (Brain Dump):</strong> Kalau otak kamu rasanya udah penuh banget sama pikiran-pikiran gak jelas, jangan dipendam. Ambil buku di dekat kasur atau buka notes di HP, terus tulis semua hal yang bikin kamu cemas malam itu tanpa perlu mikirin ejaan atau bahasanya. Keluarin aja semuanya sampai tanganmu capek. Begitu semuanya tumpah ke tulisan, otak kamu bakal otomatis ngerasa lebih plong dan siap buat tidur.</li>
+            <li><strong>Tanya ke Diri Sendiri: "Penting Gak Sih 5 Tahun Lagi?":</strong> Pas kamu lagi stres banget mikirin suatu kesalahan kecil hari ini (misal salah ngomong pas presentasi), coba tarik napas dan pikirin: <em>"Kira-kira, masalah ini bakal tetep bikin hidup gue hancur gak ya dalam 5 tahun ke depan?"</em>. Kalau jawabannya enggak, ya udah ngapain kamu korbanin waktu tidur berharga kamu malam ini cuma buat meratapi hal itu? Cuekin aja, besok orang-orang juga udah lupa.</li>
+            <li><strong>Fokus Sama yang Bisa Kamu Lakukan Besok Pagi:</strong> Kamu gak akan pernah bisa ngatur opini orang lain tentang kamu, gak bisa ngatur seberapa pelit guru ngasih nilai, dan gak bisa ngatur masa depan secara instan. Jadi, gak usah dicemasin! Yang bisa kamu atur itu tindakan kamu sendiri. Fokus aja ke apa yang bisa kamu kerjain besok pagi, sisanya let it flow aja.</li>
+            <li><strong>Hargai Sukses-Sukses Kecilmu:</strong> Seringkali kita terlalu keras sama diri sendiri. Kita baru ngerasa hebat kalau dapet juara satu atau menang lomba. Padahal, bisa bangun pagi tepat waktu tanpa telat, berhasil paham satu rumus matematika yang tadinya pusing banget, atau sukses nolak ajakan main demi tidur cepat itu udah sebuah prestasi yang keren banget! Yuk, belajar sayang sama diri sendiri pelan-pelan.</li>
+        </ul>
+        <button onclick="closeModal('life-modal')">Tutup Catatan</button>
+    </dialog>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).showModal();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).close();
+        }
+    </script>
+</body>
+</html>
